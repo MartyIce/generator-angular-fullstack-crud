@@ -1,0 +1,8 @@
+'use strict';
+
+angular.module('<%=appName%>')
+  .controller('<%=formalEntityName%>EditCtrl', function ($scope, $http) {
+    $http.get('/api/<%=entityName%>s').success(function(<%=entityName%>s) {
+      $scope.<%=entityName%>s = <%=entityName%>s;
+    });
+  });

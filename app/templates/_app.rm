@@ -1,0 +1,10 @@
+      .when('/<%=entityName%>s', {
+        templateUrl: 'partials/<%=entityName%>s',
+        controller: '<%=formalEntityName%>sCtrl',
+        authenticate: true
+      })
+      .when('/<%=entityName%>/edit', {
+        templateUrl: 'partials/<%=entityName%>_edit',
+        controller: '<%=formalEntityName%>EditCtrl',
+        authenticate: true
+      })

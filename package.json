@@ -1,0 +1,37 @@
+{
+  "name": "generator-angular-fullstack-crud",
+  "version": "0.0.0",
+  "description": "Yeoman generator",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "MartyIce/generator-angular-fullstack-crud",
+  "author": {
+    "name": "Marty",
+    "email": "",
+    "url": "https://github.com/MartyIce"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "~0.16.0",
+    "chalk": "~0.4.0",
+    "yosay": "^0.1.0",
+    "jquery": "^2.1.1"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  }
+}

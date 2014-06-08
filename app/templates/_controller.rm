@@ -1,0 +1,17 @@
+'use strict';
+
+var mongoose = require('mongoose'),
+    <%= formalEntityName %> = mongoose.model('<%= formalEntityName %>');
+
+/**
+ * Get <%= entityName %>s
+ */
+exports.<%= entityName %>s = function(req, res) {
+    return <%= formalEntityName %>.find(function (err, <%= entityName %>s) {
+        if (!err) {
+            return res.json(<%= entityName %>s);
+        } else {
+            return res.send(err);
+        }
+    });
+};

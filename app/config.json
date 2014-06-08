@@ -1,0 +1,30 @@
+{
+    "clean": true,
+    "appName": "rez4App",
+    "globalModel":
+    {
+        "name": "String",
+        "creation_datetime": "Date"
+    },
+    "entities": [
+        {
+            "name": "reservation",
+            "model": {
+                "headcount": "Number",
+                "reservation_datetime": "Date"
+
+            }
+        },
+        {
+            "name": "table",
+            "model": {
+                "capacity": "Number"
+            }
+        },
+        {
+            "name": "server",
+            "model": {
+            }
+        }
+    ]
+}

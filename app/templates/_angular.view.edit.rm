@@ -1,0 +1,17 @@
+<div ng-include="'partials/navbar.html'"></div>
+
+<%
+    var totalCounter = 0, counter = 0;
+    _.forIn(globalModel, function(value, key) { totalCounter++; });
+    _.forIn(model, function(value, key) { totalCounter++; });
+%>
+<div>
+    <form>
+<% _.forIn(modelToGenerate, function(value, key) { %>
+    <div class="formGroup">
+        <label><%=key%></label>
+        <input type="text" value="<%=key%>"></input>
+    </div>
+<% }); %>
+    </form>
+</div>

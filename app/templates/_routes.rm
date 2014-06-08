@@ -1,0 +1,1 @@
+  app.route('/api/<%=entityName%>s').get(<%=entityName%>.<%=entityName%>s);

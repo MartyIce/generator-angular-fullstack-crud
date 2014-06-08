@@ -1,0 +1,1 @@
+    var <%=entityName%> = require('./controllers/<%=entityName%>s');

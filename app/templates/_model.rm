@@ -1,0 +1,17 @@
+'use strict';
+
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
+
+/**
+ * <%= formalEntityName %> Schema
+ */<%
+    var totalCounter = 0, counter = 0;
+    _.forIn(globalModel, function(value, key) { totalCounter++; });
+    _.forIn(model, function(value, key) { totalCounter++; });
+%>
+var <%= formalEntityName %>Schema = new Schema({<% _.forIn(modelToGenerate, function(value, key) { %>
+    <%= key%>: <%= value%><% if(counter++<totalCounter-1) {%>,<%} }); %>
+});
+
+mongoose.model('<%= formalEntityName %>',  <%= formalEntityName %>Schema);
