@@ -1,0 +1,42 @@
+<div ng-include="'partials/navbar.html'"></div>
+
+<div class="row marketing">
+
+<div class="btn-group">
+    <button type="button" class="btn btn-default" ng-click="addNew()" >Add</button>
+</div>
+
+<table class="table table-condensed">
+    <thead>
+        <tr style="font-size:14px;">
+<% _.forIn(modelToGenerate, function(value, key) {
+            var formal = key.charAt(0).toUpperCase() + key.slice(1);
+            %>
+
+            <th><%=formal%></th>
+<% }); %>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in <%=entityName%>s" ng-class-even="table-striped" style="cursor:pointer">
+<% _.forIn(modelToGenerate, function(value, key) { %>
+            <td>{{item.<%=key%>}}</td>
+<% }); %>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-click="selectItem(item)" >Edit</button>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-click="deleteItem(item)" >Delete</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+</div>

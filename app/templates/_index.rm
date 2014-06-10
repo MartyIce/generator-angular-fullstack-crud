@@ -1,2 +1,2 @@
-        <script src="scripts/controllers/<%=entityName%>s.js"></script>
-        <script src="scripts/controllers/<%=entityName%>.edit.js"></script>
+        <script src="scripts/controllers/<%=entityName%>List.js"></script>
+        <script src="scripts/controllers/<%=entityName%>Edit.js"></script>

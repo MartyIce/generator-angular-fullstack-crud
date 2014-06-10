@@ -1,8 +1,25 @@
 'use strict';
 
 angular.module('<%=appName%>')
-  .controller('<%=formalEntityName%>EditCtrl', function ($scope, $http) {
-    $http.get('/api/<%=entityName%>s').success(function(<%=entityName%>s) {
-      $scope.<%=entityName%>s = <%=entityName%>s;
-    });
-  });
+  .controller('<%=formalEntityName%>EditController', ['$scope', '$http', '$routeParams','$location', function ($scope, $http, $routeParams, $location) {
+    var <%=entityName%>Id = $routeParams.id;
+    if(<%=entityName%>Id > 0) {
+        $http.get('/api/<%=entityName%>/' + <%=entityName%>Id).success(function(<%=entityName%>) {
+          $scope.<%=entityName%> = <%=entityName%>;
+        });
+    }
+
+    $scope.saveItem = function() {
+        if(<%=entityName%>Id > 0) {
+            $http.put('/api/<%=entityName%>/' + <%=entityName%>Id, $scope.<%=entityName%>).success(function(<%=entityName%>) {
+                $location.path('/<%=entityName%>s')
+            });
+        }
+        else {
+            $http.post('/api/<%=entityName%>', $scope.<%=entityName%>).success(function(<%=entityName%>) {
+                $location.path('/<%=entityName%>s')
+            });
+        }
+    };
+
+  }]);

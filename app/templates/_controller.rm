@@ -15,3 +15,55 @@ exports.<%= entityName %>s = function(req, res) {
         }
     });
 };
+exports.edit = function(req, res) {
+  return <%= formalEntityName %>.findById(req.params.id, function (err, item) {
+    if (!err) {
+      return res.send(item);
+    } else {
+      return console.log(err);
+    }
+  });
+};
+
+exports.create = function (req, res){
+    var <%= entityName %>;
+    <%= entityName %> = new <%= formalEntityName %>({
+<% _.forIn(modelToGenerate, function(value, key) { %>        <%=key%>: req.body.<%=key%>,
+<% }); %>    });
+    <%= entityName %>.save(function (err) {
+        if (!err) {
+            return console.log("created");
+        } else {
+            return console.log(err);
+        }
+    });
+    return res.send(<%= entityName %>);
+};
+
+exports.save = function (req, res){
+  return <%= formalEntityName %>.findById(req.params.id, function (err, <%=entityName%>) {
+<% _.forIn(modelToGenerate, function(value, key) { %>        <%=entityName%>.<%=key%> = req.body.<%=key%>;
+<% }); %>
+    return <%=entityName%>.save(function (err) {
+      if (!err) {
+        console.log("updated");
+      } else {
+        console.log(err);
+      }
+      return res.send(<%=entityName%>);
+    });
+  });
+};
+
+exports.delete = function (req, res){
+  return <%= formalEntityName %>.findById(req.params.id, function (err, <%= entityName %>) {
+    return <%=entityName%>.remove(function (err) {
+      if (!err) {
+        console.log("removed");
+        return res.send('');
+      } else {
+        console.log(err);
+      }
+    });
+  });
+};

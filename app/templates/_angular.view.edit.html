@@ -1,0 +1,43 @@
+<div ng-include="'partials/navbar.html'"></div>
+
+<%
+
+var totalCounter = 0, counter = 0;
+_.forIn(globalModel, function(value, key) { totalCounter++; });
+_.forIn(model, function(value, key) { totalCounter++; });
+%>
+<div>
+    <div class="col-md-9">
+        <h1 class="ng-binding"></h1>
+
+        <form role="form" name="form" ng-submit="saveItem()" novalidate=""
+              class="ng-pristine ng-invalid ng-invalid-required">
+            <% _.forIn(modelToGenerate, function(value, key) {
+                var formal = key.charAt(0).toUpperCase() + key.slice(1);
+
+            %>
+
+            <div class="row">
+                <div class="form-group col-xs-6 col-md-4">
+                    <label for="<%=key%>Input" class="ng-binding"><%=formal%></label>
+                    <!--<span ng-hide="!streetAddress.required" style="padding-left: 8px" class="ng-binding">(required)</span>-->
+                    <input id="<%=key%>Input" name="<%=key%>Input"
+                           ng-model="<%=entityName%>.<%=key%>"
+                           class="form-control ng-pristine ng-invalid ng-invalid-required"
+                           placeholder="Enter <%=formal%>" auto-focus=""/>
+                    <!--ng-required="streetAddress.required &amp;&amp; streetAddress.visible" required="required">-->
+                </div>
+            </div>
+            <% }); %>
+            <div class="row">
+                <div class="col-xs-6 col-md-4">
+                    <button type="submit" class="btn btn-primary pull-right" ng-disabled="form.$error.required"
+                            disabled="disabled"><span class="ng-binding">Save</span> <span
+                            class="glyphicon glyphicon-chevron-right"></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>

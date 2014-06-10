@@ -116,10 +116,10 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
 
                 _this.template('_model.rm', 'lib/models/' + entity.name + '.js');
                 _this.template('_controller.rm', 'lib/controllers/' + entity.name + 's.js');
-                _this.template('_angular.controller.rm', 'app/scripts/controllers/' + entity.name + 's.js');
-                _this.template('_angular.view.rm', 'app/views/partials/' + entity.name + 's.html');
-                _this.template('_angular.controller.edit.rm', 'app/scripts/controllers/' + entity.name + '.edit.js');
-                _this.template('_angular.view.edit.rm', 'app/views/partials/' + entity.name + '_edit.html');
+                _this.template('_angular.controller.list.rm', 'app/scripts/controllers/' + entity.name + 'List.js');
+                _this.template('_angular.view.list.html', 'app/views/partials/' + entity.name + 'List.html');
+                _this.template('_angular.controller.edit.rm', 'app/scripts/controllers/' + entity.name + 'Edit.js');
+                _this.template('_angular.view.edit.html', 'app/views/partials/' + entity.name + 'Edit.html');
                 _this.injectTemplateInfo(['_navbar.rm'], 'app/scripts/controllers/navbar.js', ['// MENU ITEM BEGIN']);
                 _this.injectTemplateInfo(['_routes.includes.rm', '_routes.rm'], 'lib/routes.js', ['// ROUTE INCLUDES BEGIN', '// ROUTES BEGIN']);
                 _this.injectTemplateInfo(['_app.rm'], 'app/scripts/app.js', ['// MENU ITEM BEGIN']);

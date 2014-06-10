@@ -1,0 +1,23 @@
+'use strict';
+
+angular.module('<%=appName%>')
+  .controller('<%=formalEntityName%>ListController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+    $http.get('/api/<%=entityName%>s').success(function(<%=entityName%>s) {
+      $scope.<%=entityName%>s = <%=entityName%>s;
+    });
+
+    $scope.selectItem = function(item) {
+        $location.path('/<%=entityName%>/edit/' + item._id)
+    }
+    $scope.deleteItem = function(item) {
+        $http.delete('/api/<%=entityName%>/' + item._id).success(function() {
+            $http.get('/api/<%=entityName%>s').success(function(<%=entityName%>s) {
+              $scope.<%=entityName%>s = <%=entityName%>s;
+            });
+        });
+    }
+
+    $scope.addNew = function() {
+        $location.path('/<%=entityName%>/edit/-1')
+    }
+  }]);
