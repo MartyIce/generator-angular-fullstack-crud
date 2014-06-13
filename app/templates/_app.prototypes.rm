@@ -1,0 +1,3 @@
+        String.prototype.shortDateFormat = function() {
+            return this.substr(0, this.indexOf("T"));
+        }

@@ -95,7 +95,7 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
         if(_this.config.clean) {
             _this.cleanDestination('app/scripts/controllers/navbar.js', [['// MENU ITEM BEGIN', '// MENU ITEM END']]);
             _this.cleanDestination('lib/routes.js', [['// ROUTE INCLUDES BEGIN', '// ROUTE INCLUDES END'], ['// ROUTES BEGIN', '// ROUTES END']]);
-            _this.cleanDestination('app/scripts/app.js', [['// MENU ITEM BEGIN', '// MENU ITEM END']]);
+            _this.cleanDestination('app/scripts/app.js', [['// PROTOTYPES BEGIN', '// PROTOTYPES END'], ['// MENU ITEM BEGIN', '// MENU ITEM END']]);
             _this.cleanDestination('app/views/index.html', [['<!-- CONTROLLERS BEGIN -->', '<!-- CONTROLLERS END -->']]);
         }
 
@@ -120,10 +120,10 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
                 _this.template('_angular.view.list.html', 'app/views/partials/' + entity.name + 'List.html');
                 _this.template('_angular.controller.edit.rm', 'app/scripts/controllers/' + entity.name + 'Edit.js');
                 _this.template('_angular.view.edit.html', 'app/views/partials/' + entity.name + 'Edit.html');
-                _this.injectTemplateInfo(['_navbar.rm'], 'app/scripts/controllers/navbar.js', ['// MENU ITEM BEGIN']);
-                _this.injectTemplateInfo(['_routes.includes.rm', '_routes.rm'], 'lib/routes.js', ['// ROUTE INCLUDES BEGIN', '// ROUTES BEGIN']);
-                _this.injectTemplateInfo(['_app.rm'], 'app/scripts/app.js', ['// MENU ITEM BEGIN']);
-                _this.injectTemplateInfo(['_index.rm'], 'app/views/index.html', ['<!-- CONTROLLERS BEGIN -->']);
+                _this.injectTemplateInfo(['_navbar.rm'], 'app/scripts/controllers/navbar.js', ['// MENU ITEM BEGIN'], ['}];']);
+                _this.injectTemplateInfo(['_routes.includes.rm', '_routes.rm'], 'lib/routes.js', ['// ROUTE INCLUDES BEGIN', '// ROUTES BEGIN'], ['middleware = require(\'./middleware\');', '.get(users.show);']);
+                _this.injectTemplateInfo(['_app.rm'], 'app/scripts/app.js', ['// MENU ITEM BEGIN'], ['})']);
+                _this.injectTemplateInfo(['_index.rm'], 'app/views/index.html', ['<!-- CONTROLLERS BEGIN -->'], ['<script src="scripts/controllers/settings.js"></script>']);
 
 //            _this.template('_editView.html', './views/' + _this.camelEntityName + 'Edit.html');
 //            injectTemplateInfo(['_catalog.define.js','_catalog.inject.js', '_catalog.use.js'], './scripts/catalog.js', ['// ECENTITY GENERATOR BEGIN DEFINE', '// ECENTITY GENERATOR BEGIN INJECT', '// ECENTITY GENERATOR BEGIN USE']);
@@ -134,6 +134,10 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
             }
 
         });
+
+        _this.injectTemplateInfo(['_app.prototypes.rm'], 'app/scripts/app.js', ['// PROTOTYPES BEGIN'], ['\'use strict\';']);
+
+
     },
     cleanDestination: function (destFileName, commentTags) {
 
@@ -173,8 +177,9 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
             console.log('error saving file: ', err);
         }
     },
-    injectTemplateInfo: function (templateNames, destFileName, commentTags) {
+    injectTemplateInfo: function (templateNames, destFileName, commentTags, codeBlocks) {
 
+        var _this = this;
         if(!templateNames)
         {
             return;
@@ -186,29 +191,71 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
 
         var file = this.readFileAsString(destFileName);
 
-        var templatedBody = [];
-        var templateIndex = 0;
-        for (var i = 0, ln = templateNames.length; i < ln; i++) {
-            var body = this.read(templateNames[i], 'utf8');
-            templatedBody[templateIndex++] = this.engine(body, this);
-        }
-
-        /* make modifications to the file string here */
         var lines = file.split('\n');
         var output = '';
         var commentIndex = 0;
         var commentTag = commentTags[commentIndex];
+        var codeBlock = codeBlocks && codeBlocks.length > 0 ? codeBlocks[0] : undefined;
+
+        var commentTagExists = false, codeBlockExists = false;
         for (var i = 0, ln = lines.length; i < ln; i++) {
             if (lines[i].indexOf(commentTag) >= 0) {
-                output += lines[i] + '\n';
-                output += templatedBody[commentIndex];
-                i++;
-                commentIndex++;
-                if (commentIndex < commentTags.length) {
-                    commentTag = commentTags[commentIndex];
-                }
+                commentTagExists = true;
+            } else if(codeBlock && lines[i].indexOf(codeBlock) >= 0) {
+                codeBlockExists = true;
             }
-            output += lines[i] + '\n';
+        }
+
+        _this.isClean = codeBlockExists && !commentTagExists;
+        _this.beginComment = commentTag;
+        _this.endComment = commentTag.replace('BEGIN', 'END');
+
+        var templatedBody = [];
+        var templateIndex = 0;
+        for (var i = 0, ln = templateNames.length; i < ln; i++) {
+            var body = this.read(templateNames[i] + (codeBlockExists && !commentTagExists ? '.fromcodeblocks' : ''), 'utf8');
+            templatedBody[templateIndex++] = this.engine(body, this);
+        }
+
+        var processingDone = false;
+        for (var i = 0, ln = lines.length; i < ln; i++) {
+            if(commentTagExists) {
+                if (!processingDone && lines[i].indexOf(commentTag) >= 0) {
+                    output += lines[i] + '\n';
+                    output += templatedBody[commentIndex];
+                    i++;
+                    commentIndex++;
+                    if (commentIndex < commentTags.length) {
+                        commentTag = commentTags[commentIndex];
+                    } else {
+                        processingDone = true;
+                    }
+                }
+                output += lines[i] + '\n';
+            }
+            else if (codeBlockExists) {
+                if (!processingDone && lines[i].indexOf(codeBlock) >= 0) {
+
+
+                    output += lines[i] + '\n';
+                    output += templatedBody[commentIndex];
+                    i++;
+                    commentIndex++;
+
+                    if (commentIndex < codeBlocks.length) {
+                        codeBlock = codeBlocks[commentIndex];
+                        _this.beginComment = commentTags[commentIndex];
+                        _this.endComment = commentTags[commentIndex].replace('BEGIN', 'END');
+
+                        var body = this.read(templateNames[commentIndex] + '.fromcodeblocks', 'utf8');
+                        templatedBody[commentIndex] = this.engine(body, this);
+
+                    } else {
+                        processingDone = true;
+                    }
+                }
+                output += lines[i] + '\n';
+            }
         }
 
         try {

@@ -1,0 +1,10 @@
+<% if(isClean) {
+    %>
+    <%=beginComment%>
+    <%} %>$scope.menu.push({
+        'title': '<%=formalEntityName%>',
+        'link': '/<%=entityName%>s'
+    });
+<% if(isClean) {
+    %>    <%=endComment%>
+    <%} %>

@@ -21,11 +21,22 @@ _.forIn(model, function(value, key) { totalCounter++; });
                 <div class="form-group col-xs-6 col-md-4">
                     <label for="<%=key%>Input" class="ng-binding"><%=formal%></label>
                     <!--<span ng-hide="!streetAddress.required" style="padding-left: 8px" class="ng-binding">(required)</span>-->
-                    <input id="<%=key%>Input" name="<%=key%>Input"
+                    <% if(value === 'Date') { %>
+                    <input type="date"
+                           name="<%=key%>Input"
+                           ng-model="<%=entityName%>.<%=key%>"
+                           class="form-control ng-pristine ng-invalid ng-invalid-required"
+                           placeholder="Enter <%=formal%>"
+                           auto-focus=""/>
+                    <% }
+                    else
+                    { %>
+                    <input name="<%=key%>Input"
                            ng-model="<%=entityName%>.<%=key%>"
                            class="form-control ng-pristine ng-invalid ng-invalid-required"
                            placeholder="Enter <%=formal%>" auto-focus=""/>
                     <!--ng-required="streetAddress.required &amp;&amp; streetAddress.visible" required="required">-->
+                    <% } %>
                 </div>
             </div>
             <% }); %>

@@ -1,0 +1,8 @@
+<% if(isClean) {
+    %>
+        <%=beginComment%>
+    <%} %>    <script src="scripts/controllers/<%=entityName%>List.js"></script>
+        <script src="scripts/controllers/<%=entityName%>Edit.js"></script>
+<% if(isClean) {
+    %>          <%=endComment%>
+<%} %>

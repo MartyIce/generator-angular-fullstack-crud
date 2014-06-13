@@ -21,8 +21,17 @@
     </thead>
     <tbody>
         <tr ng-repeat="item in <%=entityName%>s" ng-class-even="table-striped" style="cursor:pointer">
-<% _.forIn(modelToGenerate, function(value, key) { %>
-            <td>{{item.<%=key%>}}</td>
+<% _.forIn(modelToGenerate, function(value, key) {
+    if(value === 'Date') {
+            %>            <td>{{item.<%=key%>.shortDateFormat()}}</td>
+            <%
+    }
+    else
+    {
+            %>            <td>{{item.<%=key%>}}</td>
+            <%
+    }
+            %>
 <% }); %>
             <td>
                 <div class="btn-group">

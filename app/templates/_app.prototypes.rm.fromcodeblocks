@@ -1,0 +1,8 @@
+<% if(isClean) {
+    %>      <%=beginComment%>
+    <%} %>  String.prototype.shortDateFormat = function() {
+                return this.substr(0, this.indexOf("T"));
+            };
+<% if(isClean) {
+    %>      <%=endComment%>
+<%} %>

@@ -1,3 +1,8 @@
-      .when('/<%=entityName%>s', { templateUrl: 'partials/<%=entityName%>List', controller: '<%=formalEntityName%>ListController', authenticate: true })
+<% if(isClean) {
+    %>      <%=beginComment%>
+    <%} %>  .when('/<%=entityName%>s', { templateUrl: 'partials/<%=entityName%>List', controller: '<%=formalEntityName%>ListController', authenticate: true })
       .when('/<%=entityName%>/edit/:id', {templateUrl: 'partials/<%=entityName%>Edit', controller: '<%=formalEntityName%>EditController', authenticate: true })
       .when('/<%=entityName%>/edit', {templateUrl: 'partials/<%=entityName%>Edit', controller: '<%=formalEntityName%>EditController', authenticate: true })
+<% if(isClean) {
+    %>      <%=endComment%>
+<%} %>

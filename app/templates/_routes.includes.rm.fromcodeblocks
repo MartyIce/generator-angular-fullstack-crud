@@ -1,0 +1,7 @@
+<% if(isClean) {
+    %>
+    <%=beginComment%>
+    <%} %>var <%=entityName%> = require('./controllers/<%=entityName%>s');
+<% if(isClean) {
+    %>    <%=endComment%>
+    <%} %>
