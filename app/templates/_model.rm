@@ -10,8 +10,13 @@ var mongoose = require('mongoose'),
     _.forIn(globalModel, function(value, key) { totalCounter++; });
     _.forIn(model, function(value, key) { totalCounter++; });
 %>
-var <%= formalEntityName %>Schema = new Schema({<% _.forIn(modelToGenerate, function(value, key) { %>
-    <%= key%>: <%= value%><% if(counter++<totalCounter-1) {%>,<%} }); %>
+var <%= formalEntityName %>Schema = new Schema({<% _.forIn(modelToGenerate, function(value, key) {
+    var type = value;
+    if(type === 'ManualReference') {
+        type = 'String';
+    }
+    %>
+    <%= key%>: <%= type%><% if(counter++<totalCounter-1) {%>,<%} }); %>
 });
 
 mongoose.model('<%= formalEntityName %>',  <%= formalEntityName %>Schema);

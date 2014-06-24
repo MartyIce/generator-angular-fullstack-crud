@@ -104,7 +104,9 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
             try {
                 _this.model = entity.model;
 
-                _this.modelToGenerate = _.merge(_this.globalModel, _this.model);
+                console.log('before: ' + _this.globalModel.headcount);
+                _this.modelToGenerate = _.merge(_.clone(_this.globalModel), _this.model);
+                console.log('after: ' + _this.globalModel.headcount);
 
                 _this.entityName = entity.name;
                 _this.formalEntityName = entity.name.charAt(0).toUpperCase() + entity.name.slice(1);

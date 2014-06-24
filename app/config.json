@@ -11,8 +11,8 @@
             "name": "reservation",
             "model": {
                 "headcount": "Number",
-                "reservation_datetime": "Date"
-
+                "reservation_datetime": "Date",
+                "guest_id": "ManualReference"
             }
         },
         {
@@ -24,6 +24,12 @@
         {
             "name": "server",
             "model": {
+            }
+        },
+        {
+            "name": "guest",
+            "model": {
+                "favorite_meal": "String"
             }
         }
     ]

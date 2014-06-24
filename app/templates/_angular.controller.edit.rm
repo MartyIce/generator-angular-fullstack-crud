@@ -31,4 +31,17 @@ angular.module('<%=appName%>')
         }
     };
 
+      <% _.forIn(modelToGenerate, function(value, key) {
+        if(value === 'ManualReference') {
+            var pruned = key.replace('_id', '');
+        %>
+
+    $http.get('/api/<%=pruned%>s').success(function(<%=pruned%>s) {
+      $scope.<%=pruned%>List = <%=pruned%>s;
+    });
+
+        <%
+        }
+      });
+      %>
   }]);

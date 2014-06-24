@@ -25,16 +25,24 @@ _.forIn(model, function(value, key) { totalCounter++; });
                     <input type="date"
                            name="<%=key%>Input"
                            ng-model="<%=entityName%>.<%=key%>"
-                           class="form-control ng-pristine ng-invalid ng-invalid-required"
-                           placeholder="Enter <%=formal%>"
-                           auto-focus=""/>
+                           class="form-control"
+                           placeholder="Enter <%=formal%>"/>
                     <% }
+                    else if(value === 'ManualReference') {
+                        var pruned = key.replace('_id', '');
+                    %>
+                    <select name="<%=key%>Input"
+                            ng-model="<%=entityName%>.<%=key%>"
+                            class="form-control"
+                            ng-options="item.id as item.name for item in <%=pruned%>List"></select>
+                    <%
+                    }
                     else
                     { %>
                     <input name="<%=key%>Input"
                            ng-model="<%=entityName%>.<%=key%>"
-                           class="form-control ng-pristine ng-invalid ng-invalid-required"
-                           placeholder="Enter <%=formal%>" auto-focus=""/>
+                           class="form-control"
+                           placeholder="Enter <%=formal%>"/>
                     <!--ng-required="streetAddress.required &amp;&amp; streetAddress.visible" required="required">-->
                     <% } %>
                 </div>
