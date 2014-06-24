@@ -19,7 +19,7 @@ Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](
 $ npm install -g yo
 ```
 
-### Yeoman Generators
+## Angular Fullstack CRUD
 
 To install generator-angular-fullstack-crud from npm, run:
 
@@ -35,7 +35,49 @@ This can be accomplished by creating a new directory, and generating:
 $ yo angular-fullstack
 ```
 
-Next, create a config.json file to drive the crud generation.  The angular-fullstack-crud generator comes with an example file, config.json.  Copy that into the root of your new angular-fullstack site, and run the following:
+Next, create a config.json file to drive the crud generation.  The angular-fullstack-crud generator comes with an example file, config.json.  Here is an example of what this config might look like:
+
+'''bash
+{
+    "clean": true,
+    "appName": "rez6App",
+    "globalModel":
+    {
+        "name": "String",
+        "creation_datetime": "Date"
+    },
+    "entities": [
+        {
+            "name": "reservation",
+            "model": {
+                "headcount": "Number",
+                "reservation_datetime": "Date",
+                "guest_id": "ManualReference"
+            }
+        },
+        {
+            "name": "table",
+            "model": {
+                "capacity": "Number"
+            }
+        },
+        {
+            "name": "server",
+            "model": {
+            }
+        },
+        {
+            "name": "guest",
+            "model": {
+                "favorite_meal": "String"
+            }
+        }
+    ]
+}
+'''
+
+
+Copy that into the root of your new angular-fullstack site, and run the following:
 
 ```bash
 $ yo angular-fullstack-crud
