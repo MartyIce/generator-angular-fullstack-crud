@@ -81,8 +81,10 @@ Using the values found in the config file, the generator will add views, control
 
 * If being executed again against a site, it will rely on the "markers" to know where to inject code.  The markers will look something like this:
 
+```js
     // ROUTE INCLUDES BEGIN
     // ROUTE INCLUDES END
+```
 
 This process is a little fragile, and will work incorrectly if the existing angular-fullstack code looks differently than what the generator expects.  For best results, use the "marker" paradigm, and code will always be injected into the correct place.
 
