@@ -29,7 +29,7 @@ $ yo angular-fullstack
 
 Next, create a config.json file to drive the crud generation.  The angular-fullstack-crud generator comes with an example file, config.json.  Here is an example of what this config might look like:
 
-'''json
+```json
 {
     "clean": true,
     "appName": "rez6App",
@@ -66,7 +66,7 @@ Next, create a config.json file to drive the crud generation.  The angular-fulls
         }
     ]
 }
-'''
+```
 
 
 Copy that into the root of your new angular-fullstack site, and run the following:
