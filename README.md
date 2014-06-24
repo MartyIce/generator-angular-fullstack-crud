@@ -21,26 +21,38 @@ $ npm install -g yo
 
 ### Yeoman Generators
 
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
 To install generator-angular-fullstack-crud from npm, run:
 
 ```bash
 $ npm install -g generator-angular-fullstack-crud
 ```
 
-Finally, initiate the generator:
+Next, ensure you have a (mostly?) blank version of an angular-fullstack site.  For best results, execute the generator against a completely fresh/new angular-fullstack site.
+
+This can be accomplished by creating a new directory, and generating:
+
+```bash
+$ yo angular-fullstack
+```
+
+Next, create a config.json file to drive the crud generation.  The angular-fullstack-crud generator comes with an example file, config.json.  Copy that into the root of your new angular-fullstack site, and run the following:
 
 ```bash
 $ yo angular-fullstack-crud
 ```
 
-### Getting To Know Yeoman
+Using the values found in the config file, the generator will add views, controllers, models, etc to add the configured CRUD objects to your application.
 
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
+There are certain blocks of code that need to be injected into existing files (for example, the routes file).  There are two ways the angular-fullstack-crud generator can accomplish this:
 
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+1) If being executed for the first time, it will look for certain code signatures in the newly generated angular-fullstack site, and inject there.  It will also leave "markers" that it uses for subsequent generation.
 
+2) If being executed again against a site, it will rely on the "markers" to know where to inject code.  The markers will look something like this:
+
+    // ROUTE INCLUDES BEGIN
+    // ROUTE INCLUDES END
+
+This process is a little fragile, and will work incorrectly if the existing angular-fullstack code looks differently than what the generator expects.  For best results, use the "marker" paradigm, and code will always be injected into the correct place.
 
 ## License
 
