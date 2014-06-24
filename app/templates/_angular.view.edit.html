@@ -34,7 +34,7 @@ _.forIn(model, function(value, key) { totalCounter++; });
                     <select name="<%=key%>Input"
                             ng-model="<%=entityName%>.<%=key%>"
                             class="form-control"
-                            ng-options="item.id as item.name for item in <%=pruned%>List"></select>
+                            ng-options="item._id as item.name for item in <%=pruned%>List"></select>
                     <%
                     }
                     else
