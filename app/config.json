@@ -1,6 +1,6 @@
 {
     "clean": true,
-    "appName": "rez6App",
+    "appName": "SampleApp",
     "globalModel":
     {
         "name": "String",

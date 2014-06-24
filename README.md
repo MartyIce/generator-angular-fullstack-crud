@@ -27,7 +27,7 @@ This can be accomplished by creating a new directory, and generating:
 $ yo angular-fullstack
 ```
 
-Next, create a config.json file to drive the crud generation.  The angular-fullstack-crud generator comes with an example file, config.json.  Here is an example of what this config might look like:
+Next, create a config.json file to drive the crud generation.  The angular-fullstack-crud generator comes with an example file, config.json.  The only update required within this example is to correctly set the 'appName' property to whateve your angular-fullstack application is named.  Here is an example of what this config might look like:
 
 ```json
 {
