@@ -37,7 +37,7 @@ $ yo angular-fullstack
 
 Next, create a config.json file to drive the crud generation.  The angular-fullstack-crud generator comes with an example file, config.json.  Here is an example of what this config might look like:
 
-'''bash
+'''json
 {
     "clean": true,
     "appName": "rez6App",
@@ -83,13 +83,11 @@ Copy that into the root of your new angular-fullstack site, and run the followin
 $ yo angular-fullstack-crud
 ```
 
-Using the values found in the config file, the generator will add views, controllers, models, etc to add the configured CRUD objects to your application.
+Using the values found in the config file, the generator will add views, controllers, models, etc to add the configured CRUD objects to your application.  There are certain blocks of code that need to be injected into existing files (for example, the routes file).  There are two ways the angular-fullstack-crud generator can accomplish this:
 
-There are certain blocks of code that need to be injected into existing files (for example, the routes file).  There are two ways the angular-fullstack-crud generator can accomplish this:
+* If being executed for the first time, it will look for certain code signatures in the newly generated angular-fullstack site, and inject there.  It will also leave "markers" that it uses for subsequent generation.
 
-1) If being executed for the first time, it will look for certain code signatures in the newly generated angular-fullstack site, and inject there.  It will also leave "markers" that it uses for subsequent generation.
-
-2) If being executed again against a site, it will rely on the "markers" to know where to inject code.  The markers will look something like this:
+* If being executed again against a site, it will rely on the "markers" to know where to inject code.  The markers will look something like this:
 
     // ROUTE INCLUDES BEGIN
     // ROUTE INCLUDES END
