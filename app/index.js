@@ -88,7 +88,7 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
         this.mkdir('lib/models');
 
         var _this = this;
-        this.config = JSON.parse(this.readFileAsString(path.join(__dirname, this.configFile)));
+        this.config = JSON.parse(this.readFileAsString(path.join(this.configFile)));
         this.appName = this.config.appName;
 
         _this.globalModel = _this.config.globalModel;
