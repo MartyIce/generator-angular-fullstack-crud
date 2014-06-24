@@ -32,7 +32,7 @@ Next, create a config.json file to drive the crud generation.  The angular-fulls
 ```json
 {
     "clean": true,
-    "appName": "rez6App",
+    "appName": "SampleApp",
     "globalModel":
     {
         "name": "String",
