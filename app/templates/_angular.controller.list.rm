@@ -17,6 +17,26 @@ angular.module('<%=appName%>')
         });
     }
 
+      <% _.forIn(modelToGenerate, function(value, key) {
+        if(value === 'ManualReference') {
+            var pruned = key.replace('_id', '');
+            var formal = pruned.charAt(0).toUpperCase() + pruned.slice(1);
+        %>
+        $http.get('/api/<%=pruned%>s').success(function(<%=pruned%>s) {
+            $scope.<%=pruned%>s = <%=pruned%>s;
+        });
+        $scope.get<%=formal%>ById = function(id) {
+            var results = jQuery.grep($scope.<%=pruned%>s, function( <%=pruned%>, i ) {
+                return ( <%=pruned%>._id === id );
+            });
+            return results[0];
+        }
+        <%
+        }
+      });
+      %>
+
+
     $scope.addNew = function() {
         $location.path('/<%=entityName%>/edit')
     }

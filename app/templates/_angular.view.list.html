@@ -26,6 +26,12 @@
             %>            <td>{{item.<%=key%>.shortDateFormat()}}</td>
             <%
     }
+    else if(value === 'ManualReference') {
+        var pruned = key.replace('_id', '');
+        var formal = pruned.charAt(0).toUpperCase() + pruned.slice(1);
+    %>            <td>{{get<%=formal%>ById(item.<%=key%>).name}}</td>
+    <%
+    }
     else
     {
             %>            <td>{{item.<%=key%>}}</td>

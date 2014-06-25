@@ -1,13 +1,13 @@
 {
   "name": "generator-angular-fullstack-crud",
-  "version": "0.0.0",
-  "description": "Yeoman generator",
+  "version": "0.0.1",
+  "description": "Yeoman generator to add CRUD functionality to an angular-fullstack site",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "MartyIce/generator-angular-fullstack-crud",
   "author": {
-    "name": "Marty",
-    "email": "",
+    "name": "Marty Mavis",
+    "email": "marty.mavis@gmail.com",
     "url": "https://github.com/MartyIce"
   },
   "engines": {
