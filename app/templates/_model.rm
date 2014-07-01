@@ -14,6 +14,8 @@ var <%= formalEntityName %>Schema = new Schema({<% _.forIn(modelToGenerate, func
     var type = value;
     if(type === 'ManualReference') {
         type = 'String';
+    } else if(type.split(':')[0] === 'MongooseReference'){
+        type = '{type: Schema.ObjectId, ref:\''+type.split(':')[1]+'\'}';
     }
     %>
     <%= key%>: <%= type%><% if(counter++<totalCounter-1) {%>,<%} }); %>
