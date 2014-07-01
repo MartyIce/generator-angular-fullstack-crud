@@ -10,7 +10,9 @@
     <thead>
         <tr style="font-size:14px;">
 <% _.forIn(modelToGenerate, function(value, key) {
-            var formal = key.charAt(0).toUpperCase() + key.slice(1);
+            console.log('key: ' + key);
+            var formal = key.toHeaderFormat();
+            console.log('formal: ' + formal);
             %>
 
             <th><%=formal%></th>

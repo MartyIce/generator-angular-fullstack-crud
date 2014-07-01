@@ -13,9 +13,19 @@ String.prototype.toCamel = function () {
     });
 };
 String.prototype.toHeaderFormat = function () {
-    return this.replace(/([A-Z])/g, function ($1) {
-        return " " + $1;
-    }).charAt(0).toUpperCase().slice(1);
+//    return this.replace(/([A-Z])/g, function ($1) {
+//        return " " + $1;
+//    }).charAt(0).toUpperCase().slice(1);
+
+    var returnVal = this.replace('_', ' ').replace(/([A-Z])/g, function($1){return " " + $1;});
+    returnVal = returnVal.charAt(0).toUpperCase() + returnVal.slice(1);
+    return returnVal;
+
+//    console.log('inside toHeaderFormat 0: ' + this);
+//    var returnVal = this.replace(/([A-Z])/g, function($1){return " " + $1;});
+//    console.log('inside toHeaderFormat 1: ' + returnVal);
+//    returnVal = returnVal.charAt(0).toUpperCase() + returnVal.slice(1);
+//    console.log('inside toHeaderFormat 2: ' + returnVal);
 };
 String.prototype.endsWith = function (suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
