@@ -56,6 +56,8 @@ Next, create a config.json file to drive the crud generation.  The angular-fulls
         {
             "name": "server",
             "model": {
+                "name": "String",
+                "table": "MongooseReference:Table"
             }
         },
         {
