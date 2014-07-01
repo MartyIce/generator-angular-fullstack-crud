@@ -28,7 +28,7 @@
             %>            <td>{{item.<%=key%>.shortDateFormat()}}</td>
             <%
     }
-    else if(value === 'ManualReference') {
+    else if(value === 'ManualReference' || value.split(':')[0] === 'MongooseReference') {
         var pruned = key.replace('_id', '');
         var formal = pruned.charAt(0).toUpperCase() + pruned.slice(1);
     %>            <td>{{get<%=formal%>ById(item.<%=key%>).name}}</td>

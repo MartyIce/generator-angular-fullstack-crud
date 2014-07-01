@@ -28,7 +28,7 @@ _.forIn(model, function(value, key) { totalCounter++; });
                            class="form-control"
                            placeholder="Enter <%=formal%>"/>
                     <% }
-                    else if(value === 'ManualReference') {
+                    else if(value === 'ManualReference' || value.split(':')[0] === 'MongooseReference') {
                         var pruned = key.replace('_id', '');
                     %>
                     <select name="<%=key%>Input"

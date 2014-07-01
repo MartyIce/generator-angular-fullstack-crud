@@ -18,7 +18,7 @@ angular.module('<%=appName%>')
     }
 
       <% _.forIn(modelToGenerate, function(value, key) {
-        if(value === 'ManualReference') {
+        if(value === 'ManualReference' || value.split(':')[0] === 'MongooseReference') {
             var pruned = key.replace('_id', '');
             var formal = pruned.charAt(0).toUpperCase() + pruned.slice(1);
         %>
