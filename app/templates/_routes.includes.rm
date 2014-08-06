@@ -1,1 +1,1 @@
-    var <%=entityName%> = require('./controllers/<%=entityName%>s');
+  app.use('/api/<%=entityName%>s', require('./api/<%=entityName%>'));

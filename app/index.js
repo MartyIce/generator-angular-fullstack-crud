@@ -103,10 +103,10 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
 
         _this.globalModel = _this.config.globalModel;
         if(_this.config.clean) {
-            _this.cleanDestination('app/scripts/controllers/navbar.js', [['// MENU ITEM BEGIN', '// MENU ITEM END']]);
-            _this.cleanDestination('lib/routes.js', [['// ROUTE INCLUDES BEGIN', '// ROUTE INCLUDES END'], ['// ROUTES BEGIN', '// ROUTES END']]);
-            _this.cleanDestination('app/scripts/app.js', [['// PROTOTYPES BEGIN', '// PROTOTYPES END'], ['// MENU ITEM BEGIN', '// MENU ITEM END']]);
-            _this.cleanDestination('app/views/index.html', [['<!-- CONTROLLERS BEGIN -->', '<!-- CONTROLLERS END -->']]);
+            _this.cleanDestination('client/components/navbar/navbar.controller.js', [['// MENU ITEM BEGIN', '// MENU ITEM END']]);
+            _this.cleanDestination('server/routes.js', [['// ROUTE INCLUDES BEGIN', '// ROUTE INCLUDES END'], ['// ROUTES BEGIN', '// ROUTES END']]);
+//            _this.cleanDestination('app/scripts/app.js', [['// PROTOTYPES BEGIN', '// PROTOTYPES END'], ['// MENU ITEM BEGIN', '// MENU ITEM END']]);
+//            _this.cleanDestination('app/views/index.html', [['<!-- CONTROLLERS BEGIN -->', '<!-- CONTROLLERS END -->']]);
         }
 
         this.config.entities.forEach(function (entity) {
@@ -124,16 +124,21 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
                 _this.lkeyEntityName = _this.entityName.toLkeyFormat(true);
                 _this.headerEntityName = _this.entityName.toHeaderFormat().substring(1);
 
-                _this.template('_model.rm', 'lib/models/' + entity.name + '.js');
-                _this.template('_controller.rm', 'lib/controllers/' + entity.name + 's.js');
-                _this.template('_angular.controller.list.rm', 'app/scripts/controllers/' + entity.name + 'List.js');
-                _this.template('_angular.view.list.html', 'app/views/partials/' + entity.name + 'List.html');
-                _this.template('_angular.controller.edit.rm', 'app/scripts/controllers/' + entity.name + 'Edit.js');
-                _this.template('_angular.view.edit.html', 'app/views/partials/' + entity.name + 'Edit.html');
-                _this.injectTemplateInfo(['_navbar.rm'], 'app/scripts/controllers/navbar.js', ['// MENU ITEM BEGIN'], ['}];']);
-                _this.injectTemplateInfo(['_routes.includes.rm', '_routes.rm'], 'lib/routes.js', ['// ROUTE INCLUDES BEGIN', '// ROUTES BEGIN'], ['middleware = require(\'./middleware\');', '.get(users.show);']);
-                _this.injectTemplateInfo(['_app.rm'], 'app/scripts/app.js', ['// MENU ITEM BEGIN'], ['})']);
-                _this.injectTemplateInfo(['_index.rm'], 'app/views/index.html', ['<!-- CONTROLLERS BEGIN -->'], ['<script src="scripts/controllers/settings.js"></script>']);
+//                _this.template('_model.rm', 'lib/models/' + entity.name + '.js');
+//                _this.template('_controller.rm', 'lib/controllers/' + entity.name + 's.js');
+                _this.template('_angular.controller.list.rm', 'client/app/' + entity.name + '/list.js');
+                _this.template('_angular.view.list.html', 'client/app/' + entity.name + '/list.html');
+                _this.template('_server.api.index.rm', 'server/api/' + entity.name + '/index.js');
+                _this.template('_server.api.controller.rm', 'server/api/' + entity.name + '/' + entity.name + '.controller.js');
+                _this.template('_server.api.model.rm', 'server/api/' + entity.name + '/' + entity.name + '.model.js');
+                _this.template('_server.api.socket.rm', 'server/api/' + entity.name + '/' + entity.name + '.socket.js');
+                _this.template('_server.api.spec.rm', 'server/api/' + entity.name + '/' + entity.name + '.spec.js');
+//                _this.template('_angular.controller.edit.rm', 'app/scripts/controllers/' + entity.name + 'Edit.js');
+//                _this.template('_angular.view.edit.html', 'app/views/partials/' + entity.name + 'Edit.html');
+                _this.injectTemplateInfo(['_navbar.rm'], 'client/components/navbar/navbar.controller.js', ['// MENU ITEM BEGIN'], ['}];']);
+                _this.injectTemplateInfo(['_routes.includes.rm'], 'server/routes.js', ['// ROUTE INCLUDES BEGIN'], ['// Insert routes below']);
+//                _this.injectTemplateInfo(['_app.rm'], 'app/scripts/app.js', ['// MENU ITEM BEGIN'], ['})']);
+//                _this.injectTemplateInfo(['_index.rm'], 'app/views/index.html', ['<!-- CONTROLLERS BEGIN -->'], ['<script src="scripts/controllers/settings.js"></script>']);
 
 //            _this.template('_editView.html', './views/' + _this.camelEntityName + 'Edit.html');
 //            injectTemplateInfo(['_catalog.define.js','_catalog.inject.js', '_catalog.use.js'], './scripts/catalog.js', ['// ECENTITY GENERATOR BEGIN DEFINE', '// ECENTITY GENERATOR BEGIN INJECT', '// ECENTITY GENERATOR BEGIN USE']);
@@ -145,7 +150,7 @@ var AngularFullstackCrudGenerator = yeoman.generators.Base.extend({
 
         });
 
-        _this.injectTemplateInfo(['_app.prototypes.rm'], 'app/scripts/app.js', ['// PROTOTYPES BEGIN'], ['\'use strict\';']);
+//        _this.injectTemplateInfo(['_app.prototypes.rm'], 'app/scripts/app.js', ['// PROTOTYPES BEGIN'], ['\'use strict\';']);
 
 
     },

@@ -1,7 +1,7 @@
 <% if(isClean) {
     %>
     <%=beginComment%>
-    <%} %>var <%=entityName%> = require('./controllers/<%=entityName%>s');
+    <%} %>app.use('/api/<%=entityName%>s', require('./api/<%=entityName%>'));
 <% if(isClean) {
     %>    <%=endComment%>
     <%} %>
