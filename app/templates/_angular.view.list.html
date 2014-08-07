@@ -1,59 +1,60 @@
-<div ng-include="'partials/navbar.html'"></div>
+<div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="row marketing">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" ng-click="addNew()" >Add</button>
+            </div>
 
-<div class="btn-group">
-    <button type="button" class="btn btn-default" ng-click="addNew()" >Add</button>
-</div>
+            <table class="table table-condensed">
+                <thead>
+                    <tr style="font-size:14px;">
+            <% _.forIn(modelToGenerate, function(value, key) {
+                        console.log('key: ' + key);
+                        var formal = key.toHeaderFormat();
+                        console.log('formal: ' + formal);
+                        %>
 
-<table class="table table-condensed">
-    <thead>
-        <tr style="font-size:14px;">
-<% _.forIn(modelToGenerate, function(value, key) {
-            console.log('key: ' + key);
-            var formal = key.toHeaderFormat();
-            console.log('formal: ' + formal);
-            %>
-
-            <th><%=formal%></th>
-<% }); %>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="item in <%=entityName%>s" ng-class-even="table-striped" style="cursor:pointer">
-<% _.forIn(modelToGenerate, function(value, key) {
-    if(value === 'Date') {
-            %>            <td>{{item.<%=key%>.shortDateFormat()}}</td>
-            <%
-    }
-    else if(value === 'ManualReference' || value.split(':')[0] === 'MongooseReference') {
-        var pruned = key.replace('_id', '');
-        var formal = pruned.charAt(0).toUpperCase() + pruned.slice(1);
-    %>            <td>{{get<%=formal%>ById(item.<%=key%>).name}}</td>
-    <%
-    }
-    else
-    {
-            %>            <td>{{item.<%=key%>}}</td>
-            <%
-    }
-            %>
-<% }); %>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-click="selectItem(item)" >Edit</button>
-                </div>
-            </td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-click="deleteItem(item)" >Delete</button>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-
+                        <th><%=formal%></th>
+            <% }); %>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in <%=entityName%>s" ng-class-even="table-striped" style="cursor:pointer">
+            <% _.forIn(modelToGenerate, function(value, key) {
+                if(value === 'Date') {
+                        %>            <td>{{item.<%=key%>.shortDateFormat()}}</td>
+                        <%
+                }
+                else if(value === 'ManualReference' || value.split(':')[0] === 'MongooseReference') {
+                    var pruned = key.replace('_id', '');
+                    var formal = pruned.charAt(0).toUpperCase() + pruned.slice(1);
+                %>            <td>{{get<%=formal%>ById(item.<%=key%>).name}}</td>
+                <%
+                }
+                else
+                {
+                        %>            <td>{{item.<%=key%>}}</td>
+                        <%
+                }
+                        %>
+            <% }); %>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" ng-click="selectItem(item)" >Edit</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" ng-click="deleteItem(item)" >Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

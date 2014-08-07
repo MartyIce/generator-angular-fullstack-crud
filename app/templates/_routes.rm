@@ -1,5 +1,0 @@
-    app.route('/api/<%=entityName%>s').get(<%=entityName%>.<%=entityName%>s);
-    app.route('/api/<%=entityName%>/:id').get(<%=entityName%>.edit);
-    app.route('/api/<%=entityName%>').post(<%=entityName%>.create);
-    app.route('/api/<%=entityName%>/:id').put(<%=entityName%>.save);
-    app.route('/api/<%=entityName%>/:id').delete(<%=entityName%>.delete);
