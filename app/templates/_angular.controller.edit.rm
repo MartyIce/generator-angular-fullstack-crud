@@ -4,7 +4,7 @@ angular.module('<%=appName%>')
   .controller('<%=formalEntityName%>EditController', ['$scope', '$http', '$stateParams','$location', function ($scope, $http, $stateParams, $location) {
     var <%=entityName%>Id = $stateParams.id;
     if(<%=entityName%>Id && <%=entityName%>Id.length > 0) {
-        $http.get('/api/<%=entityName%>/' + <%=entityName%>Id).success(function(<%=entityName%>) {
+        $http.get('/api/<%=entityName%>s/' + <%=entityName%>Id).success(function(<%=entityName%>) {
           $scope.<%=entityName%> = <%=entityName%>;
 
           <% _.forIn(modelToGenerate, function(value, key) {

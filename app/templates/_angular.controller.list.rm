@@ -10,7 +10,7 @@ angular.module('<%=appName%>')
         $location.path('/<%=entityName%>/edit/' + item._id);
     }
     $scope.deleteItem = function(item) {
-        $http.delete('/api/<%=entityName%>/' + item._id).success(function() {
+        $http.delete('/api/<%=entityName%>s/' + item._id).success(function() {
             $http.get('/api/<%=entityName%>s').success(function(<%=entityName%>s) {
               $scope.<%=entityName%>s = <%=entityName%>s;
             });
