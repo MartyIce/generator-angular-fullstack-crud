@@ -1,6 +1,6 @@
 {
   "name": "generator-angular-fullstack-crud",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Yeoman generator to add CRUD functionality to an angular-fullstack site",
   "license": "MIT",
   "main": "app/index.js",
