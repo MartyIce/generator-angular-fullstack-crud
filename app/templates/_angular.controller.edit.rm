@@ -9,7 +9,7 @@ angular.module('<%=appName%>')
 
           <% _.forIn(modelToGenerate, function(value, key) {
             if(value === 'Date') {
-            %>      $scope.<%=entityName%>.<%=key%> = <%=entityName%>.<%=key%>.shortDateFormat();
+            %>      $scope.<%=entityName%>.<%=key%> = <%=entityName%>.<%=key%> && new Date(<%=entityName%>.<%=key%>);
             <%
             }
           });
