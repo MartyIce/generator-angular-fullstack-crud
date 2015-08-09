@@ -26,7 +26,7 @@
                     <tr ng-repeat="item in <%=entityName%>s" ng-class-even="table-striped" style="cursor:pointer">
             <% _.forIn(modelToGenerate, function(value, key) {
                 if(value === 'Date') {
-                        %>            <td>{{item.<%=key%>.shortDateFormat()}}</td>
+                        %>            <td>{{item.<%=key%> | date:'MM-dd-yyyy'}}</td>
                         <%
                 }
                 else if(value === 'ManualReference' || value.split(':')[0] === 'MongooseReference') {
